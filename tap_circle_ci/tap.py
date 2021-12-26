@@ -2,11 +2,11 @@
 
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 from singer_sdk.helpers._classproperty import classproperty
 
-from tap_circle_ci.streams import PipelinesStream, WorkflowsStream, JobsStream
+from tap_circle_ci.streams import JobsStream, PipelinesStream, WorkflowsStream
 
 STREAM_TYPES = [PipelinesStream, WorkflowsStream, JobsStream]
 
@@ -18,12 +18,14 @@ class TapCircleCI(Tap):
 
     @classproperty
     def config_jsonschema(cls):
+        """Return a property list with all the configuration variables read by the tap."""
         return th.PropertiesList(
             th.Property(
                 "token",
                 th.StringType,
                 required=True,
-                description="Personal API Token you have generated that can be used to access the CircleCI API",
+                description="Personal API Token you have generated that can be used to "
+                "access the CircleCI API",
             ),
             th.Property(
                 "org_slug",

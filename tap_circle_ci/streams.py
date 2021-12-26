@@ -1,9 +1,7 @@
 """Stream type classes for tap-circle-ci."""
 
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
-
-from singer_sdk import typing as th  # JSON Schema typing helpers
+from typing import Any, Dict, Optional
 
 from tap_circle_ci.client import CircleCIStream
 
@@ -11,7 +9,7 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 
 class PipelinesStream(CircleCIStream):
-    """Define pipeline stream"""
+    """Define pipeline stream."""
 
     name = "pipelines"
     path = "/pipeline"
@@ -27,6 +25,7 @@ class PipelinesStream(CircleCIStream):
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
         params = super().get_url_params(context, next_page_token)
         params["org-slug"] = self.config.get("org_slug")
         return params

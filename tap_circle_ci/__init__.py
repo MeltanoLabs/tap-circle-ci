@@ -1,0 +1,1 @@
+"""CircleCI Singer tap package."""

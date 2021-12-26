@@ -1,15 +1,12 @@
 """REST client handling, including CircleCIStream base class."""
 
-import requests
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Iterable, Optional
 
-from memoization import cached
-
+import requests
+from singer_sdk.authenticators import APIKeyAuthenticator
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from singer_sdk.authenticators import APIKeyAuthenticator
-
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
@@ -22,6 +19,7 @@ class CircleCIStream(RESTStream):
 
     @property
     def url_base(self) -> str:
+        """Return the base url from the configuration."""
         return self.config.get("base_url")
 
     @property
