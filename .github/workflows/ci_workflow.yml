@@ -1,5 +1,6 @@
 ### A CI workflow template that runs linting and python testing
-name: Test tap-circle-ci
+
+name: Test
 
 on: [push]
 
@@ -21,22 +22,21 @@ jobs:
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: 1.1.8
+        version: 1.1.11
+    - name: Create virtual environment
+      run: |
+        poetry env use python
     - name: Install dependencies
       run: |
         poetry install
     - name: Run lint command from tox.ini
       run: |
         poetry run tox -e lint
-
   pytest:
-
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     steps:
     - uses: actions/checkout@v2
@@ -48,9 +48,12 @@ jobs:
       uses: snok/install-poetry@v1
       with:
         version: 1.1.11
+    - name: Create virtual environment
+      run: |
+        poetry env use python
     - name: Install dependencies
       run: |
         poetry install
     - name: Test with pytest
       run: |
-        poetry run pytest --capture=no
+        poetry run pytest

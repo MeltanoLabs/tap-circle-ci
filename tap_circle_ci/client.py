@@ -17,21 +17,18 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 class CircleCIStream(RESTStream):
     """CircleCI stream class."""
 
-    records_jsonpath = '$.items[*]'
+    records_jsonpath = "$.items[*]"
     next_page_token_jsonpath = "$.next_page_token"  # Or override `get_next_page_token`.
 
     @property
     def url_base(self) -> str:
-        return self.config.get('base_url')
+        return self.config.get("base_url")
 
     @property
     def authenticator(self) -> APIKeyAuthenticator:
         """Return a new authenticator object."""
         return APIKeyAuthenticator.create_for_stream(
-            self,
-            key="Circle-Token",
-            value=self.config.get("token"),
-            location="header"
+            self, key="Circle-Token", value=self.config.get("token"), location="header"
         )
 
     @property
@@ -48,9 +45,7 @@ class CircleCIStream(RESTStream):
         self, response: requests.Response, previous_token: Optional[Any]
     ) -> Optional[Any]:
         """Return a token for identifying next page or None if no more pages."""
-        all_matches = extract_jsonpath(
-            self.next_page_token_jsonpath, response.json()
-        )
+        all_matches = extract_jsonpath(self.next_page_token_jsonpath, response.json())
         return next(iter(all_matches), None)
 
     def get_url_params(
@@ -65,4 +60,3 @@ class CircleCIStream(RESTStream):
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result rows."""
         yield from extract_jsonpath(self.records_jsonpath, input=response.json())
-

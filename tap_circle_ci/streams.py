@@ -12,6 +12,7 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 class PipelinesStream(CircleCIStream):
     """Define pipeline stream"""
+
     name = "pipelines"
     path = "/pipeline"
     primary_keys = ["id"]
@@ -21,19 +22,19 @@ class PipelinesStream(CircleCIStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "pipeline_id": record["id"],
-            "project_slug": record["project_slug"]
-        }
+        return {"pipeline_id": record["id"], "project_slug": record["project_slug"]}
 
-    def get_url_params(self, context: Optional[dict], next_page_token: Optional[Any]) -> Dict[str, Any]:
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        params['org-slug'] = self.config.get("org_slug")
+        params["org-slug"] = self.config.get("org_slug")
         return params
 
 
 class WorkflowsStream(CircleCIStream):
     """Define workflow stream."""
+
     parent_stream_type = PipelinesStream
     name = "workflows"
     path = "/pipeline/{pipeline_id}/workflow"
@@ -42,13 +43,12 @@ class WorkflowsStream(CircleCIStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "workflow_id": record["id"]
-        }
+        return {"workflow_id": record["id"]}
 
 
 class JobsStream(CircleCIStream):
     """Define jobs stream."""
+
     parent_stream_type = WorkflowsStream
     name = "jobs"
     path = "/workflow/{workflow_id}/job"
