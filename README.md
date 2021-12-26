@@ -15,7 +15,9 @@ WARNING: You must follow the projects in CircleCI to obtain their pipelines.
 
 You can install this repository directly from the Github repo. For example, by running:
 
+```bash
 pipx install https://github.com/MeltanoLabs/tap-circle-ci.git
+```
 
 ## Configuration
 
