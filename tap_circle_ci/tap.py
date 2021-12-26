@@ -18,8 +18,7 @@ class TapCircleCI(Tap):
 
     @classproperty
     def config_jsonschema(cls):
-        """Return a property list with all the configuration variables
-        read by the tap."""
+        """Return a list of configuration properties read by the tap."""
         return th.PropertiesList(
             th.Property(
                 "token",

@@ -20,13 +20,16 @@ class CircleCIStream(RESTStream):
     @property
     def url_base(self) -> str:
         """Return the base url from the configuration."""
-        return self.config.get("base_url")
+        return str(self.config.get("base_url"))
 
     @property
     def authenticator(self) -> APIKeyAuthenticator:
         """Return a new authenticator object."""
         return APIKeyAuthenticator.create_for_stream(
-            self, key="Circle-Token", value=self.config.get("token"), location="header"
+            self,
+            key="Circle-Token",
+            value=str(self.config.get("token")),
+            location="header",
         )
 
     @property
