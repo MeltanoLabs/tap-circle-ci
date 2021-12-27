@@ -53,3 +53,9 @@ class JobsStream(CircleCIStream):
     path = "/workflow/{workflow_id}/job"
     primary_keys = ["id"]
     schema_filepath = SCHEMAS_DIR / "jobs.json"
+
+    def post_process(self, row: dict, context: Optional[dict] = None) -> Optional[dict]:
+        """Add the Workflow ID to the row."""
+        if row and context:
+            row["_workflow_id"] = context["workflow_id"]
+        return row
