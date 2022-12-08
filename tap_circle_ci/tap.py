@@ -35,7 +35,10 @@ class TapCircleCI(Tap):
                 "Example: org-slug=gh/CircleCI-Public",
             ),
             th.Property(
-                "base_url", th.StringType, default="https://circleci.com/api/v2"
+                "base_url",
+                th.StringType,
+                default="https://circleci.com/api/v2",
+                description="The API base URL to use for requests. Default, https://circleci.com/api/v2.",
             ),
             th.Property(
                 "user_agent",
