@@ -1,38 +1,66 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core>=1.6",
+]
+
 [tool.poetry]
 name = "tap-circle-ci"
 version = "0.1.1"
 description = "`tap-circle-ci` is a Singer tap for CircleCI, built with the Meltano SDK for Singer Taps."
-authors = ["Fran Lozano"]
-keywords = [
-    "ELT",
-    "CircleCI",
+authors = [
+  "Fran Lozano <fjlozanos@gmail.com>",
 ]
-license = "Apache 2.0"
+maintainers = [
+  "Fran Lozano <fjlozanos@gmail.com>",
+  "Meltano Team <hello@meltano.com>",
+]
+keywords = [
+  "ELT",
+  "Meltano",
+  "CircleCI",
+]
+license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = "<3.11,>=3.6.2"
-requests = "^2.25.1"
-singer-sdk = "^0.3.17"
+python = ">=3.7.1,<3.12"
+requests = "^2.31.0"
+singer-sdk = "^0.27.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.5"
-tox = "^3.24.4"
-flake8 = "^3.9.2"
-black = "^21.9b0"
-pydocstyle = "^6.1.1"
-mypy = "^0.910"
-types-requests = "^2.26.1"
-isort = "^5.10.1"
-
-[tool.isort]
-profile = "black"
-multi_line_output = 3 # Vertical Hanging Indent
-src_paths = "tap_circle_ci"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+pytest = "^7.3.1"
+types-requests = "^2.31.0.0"
 
 [tool.poetry.scripts]
 # CLI declaration
 tap-circle-ci = 'tap_circle_ci.tap:TapCircleCI.cli'
+
+[tool.ruff]
+ignore = [
+  "ANN101", # missing-type-self
+  "DJ",     # flake8-django
+]
+line-length = 88
+select = ["ALL"]
+src = ["tap_pulumi_cloud", "tests"]
+target-version = "py37"
+unfixable = [
+  "ERA001",  # commented-out-code
+]
+
+[tool.ruff.per-file-ignores]
+"noxfile.py" = ["ANN"]
+"tests/*" = [
+  "ANN201",  # missing-return-type-public-function
+  "S101",    # assert
+  "SLF001",  # private-member-access
+]
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.isort]
+known-first-party = ["tap_circle_ci"]
+
+[tool.ruff.pydocstyle]
+convention = "google"

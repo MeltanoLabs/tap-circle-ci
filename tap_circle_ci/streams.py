@@ -1,7 +1,9 @@
 """Stream type classes for tap-circle-ci."""
 
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 from tap_circle_ci.client import CircleCIStream
 
@@ -18,13 +20,19 @@ class PipelinesStream(CircleCIStream):
     replication_method = "INCREMENTAL"
     schema_filepath = SCHEMAS_DIR / "pipelines.json"
 
-    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
         """Return a context dictionary for child streams."""
         return {"pipeline_id": record["id"], "project_slug": record["project_slug"]}
 
     def get_url_params(
-        self, context: Optional[dict], next_page_token: Optional[Any]
-    ) -> Dict[str, Any]:
+        self,
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
         params = super().get_url_params(context, next_page_token)
         params["org-slug"] = self.config.get("org_slug")
@@ -40,7 +48,11 @@ class WorkflowsStream(CircleCIStream):
     primary_keys = ["id"]
     schema_filepath = SCHEMAS_DIR / "workflows.json"
 
-    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
         """Return a context dictionary for child streams."""
         return {"workflow_id": record["id"]}
 
@@ -54,7 +66,7 @@ class JobsStream(CircleCIStream):
     primary_keys = ["id"]
     schema_filepath = SCHEMAS_DIR / "jobs.json"
 
-    def post_process(self, row: dict, context: Optional[dict] = None) -> Optional[dict]:
+    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
         """Add the Workflow ID to the row."""
         if row and context:
             row["_workflow_id"] = context["workflow_id"]

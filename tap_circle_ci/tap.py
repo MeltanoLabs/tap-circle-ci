@@ -1,14 +1,12 @@
 """CircleCI tap class."""
 
-from typing import List
+from __future__ import annotations
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 from singer_sdk.helpers._classproperty import classproperty
 
-from tap_circle_ci.streams import JobsStream, PipelinesStream, WorkflowsStream
-
-STREAM_TYPES = [PipelinesStream, WorkflowsStream, JobsStream]
+from tap_circle_ci import streams
 
 
 class TapCircleCI(Tap):
@@ -17,7 +15,7 @@ class TapCircleCI(Tap):
     name = "tap-circle-ci"
 
     @classproperty
-    def config_jsonschema(cls):
+    def config_jsonschema(cls):  # noqa: ANN201, N805
         """Return a list of configuration properties read by the tap."""
         return th.PropertiesList(
             th.Property(
@@ -31,8 +29,10 @@ class TapCircleCI(Tap):
                 "org_slug",
                 th.StringType,
                 required=True,
-                description="Organization slug in the form vcs-slug/org-name. "
-                "Example: org-slug=gh/CircleCI-Public",
+                description=(
+                    "Organization slug in the form vcs-slug/org-name. "
+                    "Example: org-slug=gh/CircleCI-Public"
+                ),
             ),
             th.Property(
                 "base_url",
@@ -48,6 +48,10 @@ class TapCircleCI(Tap):
             ),
         ).to_dict()
 
-    def discover_streams(self) -> List[Stream]:
+    def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams."""
-        return [stream_class(tap=self) for stream_class in STREAM_TYPES]
+        return [
+            streams.JobsStream(tap=self),
+            streams.PipelinesStream(tap=self),
+            streams.WorkflowsStream(tap=self),
+        ]
