@@ -41,7 +41,7 @@ tap-circle-ci --about
 
 ### Source Authentication and Authorization
 
-Login to your Circle CI account, go to the [Personal API Tokens](https://circleci.com/account/api) page, 
+Login to your Circle CI account, go to the [Personal API Tokens](https://circleci.com/account/api) page,
 and generate a new token.
 
 ## Usage
@@ -109,7 +109,7 @@ meltano elt tap-circle-ci target-jsonl
 
 ### SDK Dev Guide
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to 
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
 develop your own taps and targets.
 
 [circleci]: https://app.circleci.com/
