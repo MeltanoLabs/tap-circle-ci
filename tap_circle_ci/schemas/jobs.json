@@ -1,84 +1,98 @@
 {
-  "type": [
-    "null",
-    "object"
-  ],
-  "additionalProperties": false,
+  "type": "object",
   "properties": {
-    "_workflow_id": {
-      "type": "string"
+    "canceled_by": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "The unique ID of the user."
     },
     "dependencies": {
-      "type": [
-        "null",
-        "array"
-      ],
+      "type": "array",
       "items": {
-        "type": [
-          "null",
-          "string"
-        ]
-      }
+        "type": "string",
+        "format": "uuid",
+        "description": "The unique ID of the job."
+      },
+      "description": "A sequence of the unique job IDs for the jobs that this job depends upon in the workflow."
     },
     "job_number": {
-      "type": [
-        "null",
-        "integer"
-      ]
+      "type": "integer",
+      "format": "int64",
+      "description": "The number of the job."
     },
     "id": {
-      "type": "string"
-    },
-    "canceled_by": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "approved_by": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique ID of the job."
     },
     "started_at": {
-      "type": [
-        "null",
-        "string"
-      ],
-      "format": "date-time"
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the job started."
     },
     "name": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": "string",
+      "description": "The name of the job."
+    },
+    "approved_by": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "The unique ID of the user."
     },
     "project_slug": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": "string",
+      "description": "The project-slug for the job.",
+      "example": "gh/CircleCI-Public/api-preview-docs"
     },
     "status": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "enum": [
+        "success",
+        "running",
+        "not_run",
+        "failed",
+        "retried",
+        "queued",
+        "not_running",
+        "infrastructure_fail",
+        "timedout",
+        "on_hold",
+        "terminated-unknown",
+        "blocked",
+        "canceled",
+        "unauthorized"
+      ],
+      "type": "string",
+      "description": "The current status of the job."
     },
     "type": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "enum": [
+        "build",
+        "approval"
+      ],
+      "type": "string",
+      "description": "The type of job."
     },
     "stopped_at": {
-      "type": [
-        "null",
-        "string"
-      ],
-      "format": "date-time"
+      "type": "string",
+      "format": "date-time",
+      "x-nullable": true,
+      "description": "The time when the job stopped."
+    },
+    "approval_request_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "The unique ID of the job."
     }
   },
-  "required": ["pipeline_id", "workflow_id", "id"]
+  "required": [
+    "id",
+    "name",
+    "started_at",
+    "dependencies",
+    "project_slug",
+    "status",
+    "type"
+  ],
+  "description": "Job",
+  "title": "Job"
 }
