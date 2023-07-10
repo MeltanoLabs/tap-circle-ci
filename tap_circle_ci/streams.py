@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+import typing as t
 from pathlib import Path
-from typing import Any
 
 from tap_circle_ci.client import CircleCIStream
 
@@ -15,7 +15,7 @@ class PipelinesStream(CircleCIStream):
 
     name = "pipelines"
     path = "/pipeline"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     replication_key = "updated_at"
     replication_method = "INCREMENTAL"
     schema_filepath = SCHEMAS_DIR / "pipelines.json"
@@ -31,8 +31,8 @@ class PipelinesStream(CircleCIStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: Any | None,
-    ) -> dict[str, Any]:
+        next_page_token: t.Any | None,
+    ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization."""
         params = super().get_url_params(context, next_page_token)
         params["org-slug"] = self.config.get("org_slug")
@@ -45,7 +45,7 @@ class WorkflowsStream(CircleCIStream):
     parent_stream_type = PipelinesStream
     name = "workflows"
     path = "/pipeline/{pipeline_id}/workflow"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     schema_filepath = SCHEMAS_DIR / "workflows.json"
 
     def get_child_context(
@@ -63,7 +63,7 @@ class JobsStream(CircleCIStream):
     parent_stream_type = WorkflowsStream
     name = "jobs"
     path = "/workflow/{workflow_id}/job"
-    primary_keys = ["id"]
+    primary_keys: t.ClassVar[list[str]] = ["id"]
     schema_filepath = SCHEMAS_DIR / "jobs.json"
 
     def post_process(self, row: dict, context: dict | None = None) -> dict | None:
