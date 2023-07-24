@@ -31,7 +31,7 @@ class PipelinesStream(CircleCIStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: t.Any | None,
+        next_page_token: str | None,
     ) -> dict[str, t.Any]:
         """Return a dictionary of values to be used in URL parameterization."""
         params = super().get_url_params(context, next_page_token)
