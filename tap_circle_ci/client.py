@@ -41,7 +41,7 @@ class CircleCIStream(RESTStream):
         return headers
 
     def get_url_params(
-        self,  # noqa: PLR6301
+        self,
         context: dict | None,  # noqa: ARG002
         next_page_token: str | None,
     ) -> dict[str, Any]:

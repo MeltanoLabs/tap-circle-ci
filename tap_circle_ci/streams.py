@@ -21,7 +21,7 @@ class PipelinesStream(CircleCIStream):
     schema_filepath = SCHEMAS_DIR / "pipelines.json"
 
     def get_child_context(
-        self,  # noqa: PLR6301
+        self,
         record: dict,
         context: dict | None,  # noqa: ARG002
     ) -> dict:
@@ -49,7 +49,7 @@ class WorkflowsStream(CircleCIStream):
     schema_filepath = SCHEMAS_DIR / "workflows.json"
 
     def get_child_context(
-        self,  # noqa: PLR6301
+        self,
         record: dict,
         context: dict | None,  # noqa: ARG002
     ) -> dict:
@@ -67,7 +67,7 @@ class JobsStream(CircleCIStream):
     schema_filepath = SCHEMAS_DIR / "jobs.json"
 
     def post_process(
-        self,  # noqa: PLR6301
+        self,
         row: dict,
         context: dict | None = None,
     ) -> dict | None:
