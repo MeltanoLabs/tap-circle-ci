@@ -20,7 +20,7 @@ class PipelinesStream(CircleCIStream):
     replication_method = "INCREMENTAL"
     schema_filepath = SCHEMAS_DIR / "pipelines.json"
 
-    def get_child_context(
+    def get_child_context(  # noqa: PLR6301
         self,
         record: dict,
         context: dict | None,  # noqa: ARG002
@@ -48,7 +48,7 @@ class WorkflowsStream(CircleCIStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     schema_filepath = SCHEMAS_DIR / "workflows.json"
 
-    def get_child_context(
+    def get_child_context(  # noqa: PLR6301
         self,
         record: dict,
         context: dict | None,  # noqa: ARG002
@@ -66,7 +66,7 @@ class JobsStream(CircleCIStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     schema_filepath = SCHEMAS_DIR / "jobs.json"
 
-    def post_process(
+    def post_process(  # noqa: PLR6301
         self,
         row: dict,
         context: dict | None = None,
