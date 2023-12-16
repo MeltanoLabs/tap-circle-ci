@@ -2,11 +2,17 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from typing import Any
 
 from singer_sdk.authenticators import APIKeyAuthenticator
 from singer_sdk.streams import RESTStream
+
+if sys.version_info < (3, 12):
+    from typing_extensions import override
+else:
+    from typing import override
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
@@ -40,9 +46,10 @@ class CircleCIStream(RESTStream):
             headers["User-Agent"] = self.config["user_agent"]
         return headers
 
-    def get_url_params(  # noqa: PLR6301
+    @override
+    def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
+        context: dict | None,
         next_page_token: str | None,
     ) -> dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
