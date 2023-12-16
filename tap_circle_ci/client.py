@@ -23,11 +23,13 @@ class CircleCIStream(RESTStream):
     records_jsonpath = "$.items[*]"
     next_page_token_jsonpath = "$.next_page_token"  # noqa: S105
 
+    @override
     @property
     def url_base(self) -> str:
         """Return the base url from the configuration."""
         return self.config["base_url"]
 
+    @override
     @property
     def authenticator(self) -> APIKeyAuthenticator:
         """Return a new authenticator object."""
@@ -38,6 +40,7 @@ class CircleCIStream(RESTStream):
             location="header",
         )
 
+    @override
     @property
     def http_headers(self) -> dict:
         """Return the http headers needed."""
