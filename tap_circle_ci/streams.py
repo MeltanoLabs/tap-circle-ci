@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 
+import sys
 import typing as t
 from pathlib import Path
 
 from tap_circle_ci.client import CircleCIStream
+
+if sys.version_info < (3, 12):
+    from typing_extensions import override
+else:
+    from typing import override
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
@@ -20,14 +26,12 @@ class PipelinesStream(CircleCIStream):
     replication_method = "INCREMENTAL"
     schema_filepath = SCHEMAS_DIR / "pipelines.json"
 
-    def get_child_context(  # noqa: PLR6301
-        self,
-        record: dict,
-        context: dict | None,  # noqa: ARG002
-    ) -> dict:
+    @override
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
         """Return a context dictionary for child streams."""
         return {"pipeline_id": record["id"], "project_slug": record["project_slug"]}
 
+    @override
     def get_url_params(
         self,
         context: dict | None,
@@ -48,11 +52,8 @@ class WorkflowsStream(CircleCIStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     schema_filepath = SCHEMAS_DIR / "workflows.json"
 
-    def get_child_context(  # noqa: PLR6301
-        self,
-        record: dict,
-        context: dict | None,  # noqa: ARG002
-    ) -> dict:
+    @override
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
         """Return a context dictionary for child streams."""
         return {"workflow_id": record["id"]}
 
@@ -66,11 +67,8 @@ class JobsStream(CircleCIStream):
     primary_keys: t.ClassVar[list[str]] = ["id"]
     schema_filepath = SCHEMAS_DIR / "jobs.json"
 
-    def post_process(  # noqa: PLR6301
-        self,
-        row: dict,
-        context: dict | None = None,
-    ) -> dict | None:
+    @override
+    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
         """Add the Workflow ID to the row."""
         if row and context:
             row["_workflow_id"] = context["workflow_id"]

@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  pytest:
+  test:
     runs-on: ubuntu-latest
     env:
       PIP_CONSTRAINT: .github/workflows/constraints.txt
@@ -45,3 +45,7 @@ jobs:
         TAP_CIRCLE_CI_ORG_SLUG: ${{ secrets.TAP_CIRCLE_CI_ORG_SLUG }}
       run: |
         poetry run pytest
+
+    - name: Type check with mypy
+      run: |
+        poetry run mypy tap_circle_ci
