@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk.helpers._classproperty import classproperty
+from singer_sdk.helpers._classproperty import classproperty  # noqa: PLC2701
 
 from tap_circle_ci import streams
 
