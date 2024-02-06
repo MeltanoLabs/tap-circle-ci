@@ -1,12 +1,13 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
+build-backend = "poetry_dynamic_versioning.backend"
 requires = [
   "poetry-core==1.9",
+  "poetry-dynamic-versioning==1.2",
 ]
 
 [tool.poetry]
 name = "meltano-tap-circle-ci"
-version = "0.1.1"
+version = "0.0.0"
 description = "`tap-circle-ci` is a Singer tap for CircleCI, built with the Meltano SDK for Singer Taps."
 authors = [
   "Fran Lozano <fjlozanos@gmail.com>",
@@ -40,6 +41,10 @@ types-requests = "~=2.31.0.6"
 [tool.poetry.scripts]
 # CLI declaration
 tap-circle-ci = 'tap_circle_ci.tap:TapCircleCI.cli'
+
+[tool.poetry-dynamic-versioning]
+enable = true
+style = "pep440"
 
 [tool.ruff]
 line-length = 88
