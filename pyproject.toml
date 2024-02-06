@@ -1,11 +1,11 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = [
-  "poetry-core>=1.6",
+  "poetry-core==1.9",
 ]
 
 [tool.poetry]
-name = "tap-circle-ci"
+name = "meltano-tap-circle-ci"
 version = "0.1.1"
 description = "`tap-circle-ci` is a Singer tap for CircleCI, built with the Meltano SDK for Singer Taps."
 authors = [
@@ -21,17 +21,21 @@ keywords = [
   "CircleCI",
 ]
 license = "Apache-2.0"
+packages = [
+    { include = "tap_circle_ci" },
+]
+readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
-requests = "<3,>=2"
+python = ">=3.8"
+requests = "~=2.31.0"
 singer-sdk = "~=0.34.0"
 typing-extensions = {version = "~=4.9.0", python = "<3.12"}
 
 [tool.poetry.dev-dependencies]
 mypy = ">=1.7.1"
-pytest = "^8.0.0"
-types-requests = "^2.31.0.6"
+pytest = ">=8.0.0"
+types-requests = "~=2.31.0.6"
 
 [tool.poetry.scripts]
 # CLI declaration
