@@ -44,7 +44,12 @@ tap-circle-ci = 'tap_circle_ci.tap:TapCircleCI.cli'
 
 [tool.poetry-dynamic-versioning]
 enable = true
-latest-tag = true
+pattern = """
+(?x)                                                           (?# ignore whitespace)
+    ^v?((?P<epoch>\\d+)!)?(?P<base>\\d+(\\.\\d+)*)             (?# v1.2.3 or v1!2000.1.2)
+    ([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\\d+)?))?   (?# b0)
+    (\\+(?P<tagged_metadata>.+))?$                             (?# +linux)
+"""
 style = "pep440"
 
 [tool.ruff]
