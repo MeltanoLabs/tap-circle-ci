@@ -30,7 +30,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.8"
 requests = "~=2.31.0"
-singer-sdk = "~=0.34.0"
+singer-sdk = "~=0.35.0"
 typing-extensions = {version = "~=4.9.0", python = "<3.12"}
 
 [tool.poetry.dev-dependencies]
