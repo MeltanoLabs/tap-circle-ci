@@ -44,6 +44,7 @@ tap-circle-ci = 'tap_circle_ci.tap:TapCircleCI.cli'
 
 [tool.poetry-dynamic-versioning]
 enable = true
+latest-tag = true
 style = "pep440"
 
 [tool.ruff]
