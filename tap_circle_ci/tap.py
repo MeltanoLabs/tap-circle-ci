@@ -13,6 +13,7 @@ class TapCircleCI(Tap):
     """Singer tap for the CircleCI API."""
 
     name = "tap-circle-ci"
+    package_name = "meltano-tap-circle-ci"
 
     @classproperty
     def config_jsonschema(cls):  # noqa: ANN201, N805
