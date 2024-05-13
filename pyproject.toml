@@ -23,7 +23,7 @@ keywords = [
 ]
 license = "Apache-2.0"
 packages = [
-    { include = "tap_circle_ci" },
+  { include = "tap_circle_ci" },
 ]
 readme = "README.md"
 
@@ -31,7 +31,7 @@ readme = "README.md"
 python = ">=3.8"
 requests = "~=2.31.0"
 singer-sdk = "~=0.37.0"
-typing-extensions = {version = "~=4.11.0", python = "<3.12"}
+typing-extensions = { version = "~=4.11.0", python = "<3.12" }
 
 [tool.poetry.dev-dependencies]
 mypy = ">=1.7.1"
@@ -54,7 +54,10 @@ style = "pep440"
 
 [tool.ruff]
 line-length = 88
-src = ["tap_pulumi_cloud", "tests"]
+src = [
+  "tap_pulumi_cloud",
+  "tests",
+]
 target-version = "py38"
 
 [tool.ruff.format]
@@ -67,28 +70,34 @@ ignore = [
   "ANN101", # missing-type-self
   "DJ",     # flake8-django
   "CPY",    # missing-copyright-notice
-  "COM812",  # missing-trailing-comma
-  "ISC001",  # single-line-implicit-string-concatenatio
+  "COM812", # missing-trailing-comma
+  "ISC001", # single-line-implicit-string-concatenatio
 ]
 preview = true
-select = ["ALL"]
+select = [
+  "ALL",
+]
 unfixable = [
-  "ERA001",  # commented-out-code
+  "ERA001", # commented-out-code
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"noxfile.py" = ["ANN"]
+"noxfile.py" = [
+  "ANN",
+]
 "tests/*" = [
-  "ANN201",  # missing-return-type-public-function
-  "S101",    # assert
-  "SLF001",  # private-member-access
+  "ANN201", # missing-return-type-public-function
+  "S101",   # assert
+  "SLF001", # private-member-access
 ]
 
 [tool.ruff.lint.flake8-annotations]
 allow-star-arg-any = true
 
 [tool.ruff.lint.isort]
-known-first-party = ["tap_circle_ci"]
+known-first-party = [
+  "tap_circle_ci",
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
