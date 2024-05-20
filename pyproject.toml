@@ -93,10 +93,7 @@ lint.preview = true
 
 
 
-[tool.ruff.lint.flake8-annotations]
 
 
-[tool.ruff.lint.isort]
 
 
-[tool.ruff.lint.pydocstyle]
