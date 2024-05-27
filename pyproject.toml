@@ -64,6 +64,13 @@ format.preview = true
 lint.select = [
   "ALL",
 ]
+lint.ignore = [
+  "ANN101", # missing-type-self
+  "COM812", # missing-trailing-comma
+  "CPY",    # missing-copyright-notice
+  "DJ",     # flake8-django
+  "ISC001", # single-line-implicit-string-concatenatio
+]
 lint.explicit-preview-rules = false
 lint.per-file-ignores."noxfile.py" = [
   "ANN",
@@ -81,12 +88,5 @@ lint.isort.known-first-party = [
   "tap_circle_ci",
 ]
 lint.pydocstyle.convention = "google"
-lint.ignore = [
-  "ANN101", # missing-type-self
-  "COM812", # missing-trailing-comma
-  "CPY",    # missing-copyright-notice
-  "DJ",     # flake8-django
-  "ISC001", # single-line-implicit-string-concatenatio
-]
 # Enable preview style formatting.
 lint.preview = true
