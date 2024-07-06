@@ -6,17 +6,32 @@ updates:
       interval: daily
     commit-message:
       prefix: "ci: "
+    groups:
+      ci:
+        patterns:
+          - "*"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: daily
     commit-message:
       prefix: "ci: "
+    groups:
+      actions:
+        patterns:
+          - "*"
   - package-ecosystem: pip
     versioning-strategy: increase-if-necessary
     directory: "/"
     schedule:
       interval: daily
     commit-message:
-      prefix: "chore(deps): "
+      prefix: "feat(deps): "
       prefix-development: "chore(deps-dev): "
+    groups:
+      development-dependencies:
+        dependency-type: development
+      runtime-dependencies:
+        dependency-type: production
+        update-types:
+          - "patch"
