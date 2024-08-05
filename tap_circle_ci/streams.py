@@ -28,7 +28,11 @@ class PipelinesStream(CircleCIStream):
 
     @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
-        """Return a context dictionary for child streams."""
+        """Return a context dictionary for child streams.
+
+        Returns:
+            A dictionary with the context values.
+        """
         return {"pipeline_id": record["id"], "project_slug": record["project_slug"]}
 
     @override
@@ -37,7 +41,11 @@ class PipelinesStream(CircleCIStream):
         context: dict | None,
         next_page_token: str | None,
     ) -> dict[str, t.Any]:
-        """Return a dictionary of values to be used in URL parameterization."""
+        """Get URL query parameters.
+
+        Returns:
+            A dictionary with the URL parameters.
+        """
         params = super().get_url_params(context, next_page_token)
         params["org-slug"] = self.config.get("org_slug")
         return params
@@ -54,7 +62,11 @@ class WorkflowsStream(CircleCIStream):
 
     @override
     def get_child_context(self, record: dict, context: dict | None) -> dict:
-        """Return a context dictionary for child streams."""
+        """Return a context dictionary for child streams.
+
+        Returns:
+            A dictionary with the context values.
+        """
         return {"workflow_id": record["id"]}
 
 
@@ -69,7 +81,11 @@ class JobsStream(CircleCIStream):
 
     @override
     def post_process(self, row: dict, context: dict | None = None) -> dict | None:
-        """Add the Workflow ID to the row."""
+        """Add the Workflow ID to the row.
+
+        Returns:
+            The row with the transformed data.
+        """
         if row and context:
             row["_workflow_id"] = context["workflow_id"]
         return row

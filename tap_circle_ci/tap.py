@@ -17,7 +17,11 @@ class TapCircleCI(Tap):
 
     @classproperty
     def config_jsonschema(cls):  # noqa: ANN201, N805
-        """Return a list of configuration properties read by the tap."""
+        """Return a list of configuration properties read by the tap.
+
+        Returns:
+            A JSON schema object.
+        """
         return th.PropertiesList(
             th.Property(
                 "token",
@@ -50,7 +54,11 @@ class TapCircleCI(Tap):
         ).to_dict()
 
     def discover_streams(self) -> list[Stream]:
-        """Return a list of discovered streams."""
+        """Return a list of discovered streams.
+
+        Returns:
+            A list of stream instances.
+        """
         return [
             streams.JobsStream(tap=self),
             streams.PipelinesStream(tap=self),
