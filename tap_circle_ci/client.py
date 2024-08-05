@@ -55,7 +55,11 @@ class CircleCIStream(RESTStream):
         context: dict | None,
         next_page_token: str | None,
     ) -> dict[str, Any]:
-        """Return a dictionary of values to be used in URL parameterization."""
+        """Get URL query parameters.
+
+        Returns:
+            A dictionary of values to be used in URL parameterization.
+        """
         params: dict = {}
         if next_page_token:
             params["page-token"] = next_page_token
