@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import sys
+import typing as t
 from pathlib import Path
-from typing import Any
 
 from singer_sdk.authenticators import APIKeyAuthenticator
 from singer_sdk.streams import RESTStream
@@ -13,6 +13,9 @@ if sys.version_info < (3, 12):
     from typing_extensions import override
 else:
     from typing import override
+
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
@@ -52,9 +55,9 @@ class CircleCIStream(RESTStream):
     @override
     def get_url_params(
         self,
-        context: dict | None,
+        context: Context | None,
         next_page_token: str | None,
-    ) -> dict[str, Any]:
+    ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
         Returns:

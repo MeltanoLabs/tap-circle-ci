@@ -13,6 +13,9 @@ if sys.version_info < (3, 12):
 else:
     from typing import override
 
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
+
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 
@@ -27,7 +30,7 @@ class PipelinesStream(CircleCIStream):
     schema_filepath = SCHEMAS_DIR / "pipelines.json"
 
     @override
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(self, record: dict, context: Context | None) -> dict:
         """Return a context dictionary for child streams.
 
         Returns:
@@ -38,7 +41,7 @@ class PipelinesStream(CircleCIStream):
     @override
     def get_url_params(
         self,
-        context: dict | None,
+        context: Context | None,
         next_page_token: str | None,
     ) -> dict[str, t.Any]:
         """Get URL query parameters.
@@ -61,7 +64,7 @@ class WorkflowsStream(CircleCIStream):
     schema_filepath = SCHEMAS_DIR / "workflows.json"
 
     @override
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(self, record: dict, context: Context | None) -> dict:
         """Return a context dictionary for child streams.
 
         Returns:
@@ -80,7 +83,7 @@ class JobsStream(CircleCIStream):
     schema_filepath = SCHEMAS_DIR / "jobs.json"
 
     @override
-    def post_process(self, row: dict, context: dict | None = None) -> dict | None:
+    def post_process(self, row: dict, context: Context | None = None) -> dict | None:
         """Add the Workflow ID to the row.
 
         Returns:
