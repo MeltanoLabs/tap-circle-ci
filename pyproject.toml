@@ -13,7 +13,6 @@ authors = [
   "Fran Lozano <fjlozanos@gmail.com>",
 ]
 maintainers = [
-  "Fran Lozano <fjlozanos@gmail.com>",
   "Meltano Team <hello@meltano.com>",
 ]
 keywords = [
@@ -26,6 +25,9 @@ packages = [
   { include = "tap_circle_ci" },
 ]
 readme = "README.md"
+homepage = "https://github.com/MeltanoLabs/tap-circle-ci"
+repository = "https://github.com/MeltanoLabs/tap-circle-ci"
+documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
