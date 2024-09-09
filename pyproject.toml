@@ -2,13 +2,13 @@
 build-backend = "poetry_dynamic_versioning.backend"
 requires = [
   "poetry-core==1.9",
-  "poetry-dynamic-versioning==1.2",
+  "poetry-dynamic-versioning==1.4",
 ]
 
 [tool.poetry]
 name = "meltano-tap-circle-ci"
 version = "0.0.0"
-description = "`tap-circle-ci` is a Singer tap for CircleCI, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for CircleCI, built with the Meltano SDK for Singer Taps."
 authors = [
   "Fran Lozano <fjlozanos@gmail.com>",
 ]
