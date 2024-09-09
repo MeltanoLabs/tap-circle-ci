@@ -15,7 +15,14 @@ jobs:
       PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version:
+        - "3.13"
+        - "3.12"
+        - "3.11"
+        - "3.10"
+        - "3.9"
+        - "3.8"
+      max-parallel: 3
 
     steps:
     - uses: actions/checkout@v4.1.7
@@ -23,6 +30,7 @@ jobs:
       uses: actions/setup-python@v5.2.0
       with:
         python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
 
     - name: Upgrade pip
       run: |
