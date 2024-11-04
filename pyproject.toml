@@ -1,8 +1,8 @@
 [build-system]
 build-backend = "poetry_dynamic_versioning.backend"
 requires = [
-  "poetry-core==1.9",
-  "poetry-dynamic-versioning==1.4",
+  "poetry-core~=1.9",
+  "poetry-dynamic-versioning~=1.4",
 ]
 
 [tool.poetry]
@@ -30,7 +30,7 @@ repository = "https://github.com/MeltanoLabs/tap-circle-ci"
 documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.9"
 requests = "~=2.32.1"
 singer-sdk = "~=0.41.0"
 typing-extensions = { version = "~=4.12.0", python = "<3.12" }
@@ -55,7 +55,7 @@ pattern = """
 style = "pep440"
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 
 line-length = 88
 src = [
@@ -92,3 +92,6 @@ lint.isort.known-first-party = [
 lint.pydocstyle.convention = "google"
 # Enable preview style formatting.
 lint.preview = true
+
+[tool.uv]
+python-downloads = "manual"
