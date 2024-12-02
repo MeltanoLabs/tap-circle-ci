@@ -8,10 +8,10 @@ from pathlib import Path
 
 from tap_circle_ci.client import CircleCIStream
 
-if sys.version_info < (3, 12):
-    from typing_extensions import override
-else:
+if sys.version_info >= (3, 12):
     from typing import override
+else:
+    from typing_extensions import override
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
