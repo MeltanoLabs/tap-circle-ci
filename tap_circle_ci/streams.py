@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import sys
 import typing as t
-from pathlib import Path
 
 from tap_circle_ci.client import CircleCIStream
 
@@ -16,18 +15,15 @@ else:
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
-
 
 class PipelinesStream(CircleCIStream):
     """Define pipeline stream."""
 
     name = "pipelines"
     path = "/pipeline"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = "updated_at"
     replication_method = "INCREMENTAL"
-    schema_filepath = SCHEMAS_DIR / "pipelines.json"
 
     @override
     def get_child_context(self, record: dict, context: Context | None) -> dict:
@@ -60,8 +56,7 @@ class WorkflowsStream(CircleCIStream):
     parent_stream_type = PipelinesStream
     name = "workflows"
     path = "/pipeline/{pipeline_id}/workflow"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
-    schema_filepath = SCHEMAS_DIR / "workflows.json"
+    primary_keys = ("id",)
 
     @override
     def get_child_context(self, record: dict, context: Context | None) -> dict:
@@ -79,8 +74,7 @@ class JobsStream(CircleCIStream):
     parent_stream_type = WorkflowsStream
     name = "jobs"
     path = "/workflow/{workflow_id}/job"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
-    schema_filepath = SCHEMAS_DIR / "jobs.json"
+    primary_keys = ("id",)
 
     @override
     def post_process(self, row: dict, context: Context | None = None) -> dict | None:

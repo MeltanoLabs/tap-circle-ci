@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import sys
 import typing as t
-from pathlib import Path
 
+from singer_sdk import SchemaDirectory, StreamSchema
 from singer_sdk.authenticators import APIKeyAuthenticator
 from singer_sdk.streams import RESTStream
+
+from tap_circle_ci import schemas
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -17,7 +19,7 @@ else:
 if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
+SCHEMAS_DIR = SchemaDirectory(schemas)
 
 
 class CircleCIStream(RESTStream):
@@ -25,6 +27,7 @@ class CircleCIStream(RESTStream):
 
     records_jsonpath = "$.items[*]"
     next_page_token_jsonpath = "$.next_page_token"  # noqa: S105
+    schema = StreamSchema(SCHEMAS_DIR)
 
     @override
     @property
