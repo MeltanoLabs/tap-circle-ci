@@ -36,8 +36,7 @@ class CircleCIStream(RESTStream):
     @property
     def authenticator(self) -> APIKeyAuthenticator:
         """Return a new authenticator object."""
-        return APIKeyAuthenticator.create_for_stream(
-            self,
+        return APIKeyAuthenticator(
             key="Circle-Token",
             value=self.config["token"],
             location="header",
