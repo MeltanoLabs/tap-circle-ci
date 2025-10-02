@@ -45,7 +45,6 @@ class CircleCIStream(RESTStream):
             location="header",
         )
 
-
     @override
     def get_url_params(
         self,
