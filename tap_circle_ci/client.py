@@ -46,15 +46,6 @@ class CircleCIStream(RESTStream):
         )
 
     @override
-    @property
-    def http_headers(self) -> dict:
-        """Return the http headers needed."""
-        headers = {}
-        if "user_agent" in self.config:
-            headers["User-Agent"] = self.config["user_agent"]
-        return headers
-
-    @override
     def get_url_params(
         self,
         context: Context | None,

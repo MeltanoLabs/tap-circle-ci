@@ -48,7 +48,6 @@ class TapCircleCI(Tap):
             th.Property(
                 "user_agent",
                 th.StringType,
-                default=f"{cls.name}/{cls.plugin_version} {cls.__doc__}",
                 description="User-Agent header",
             ),
         ).to_dict()
