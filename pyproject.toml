@@ -30,11 +30,11 @@ repository = "https://github.com/MeltanoLabs/tap-circle-ci"
 documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4"
+python = ">=3.10"
 requests = "~=2.32.1"
 
 [tool.poetry.dependencies."singer-sdk"]
-version = "~=0.50.0"
+version = "~=0.52.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = ">=1.7.1"
