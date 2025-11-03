@@ -55,6 +55,9 @@ pattern = """
 """
 style = "pep440"
 
+[tool.uv]
+python-downloads = "manual"
+
 [tool.ruff]
 target-version = "py310"
 
@@ -92,6 +95,3 @@ lint.isort.known-first-party = [
 lint.pydocstyle.convention = "google"
 # Enable preview style formatting.
 lint.preview = true
-
-[tool.uv]
-python-downloads = "manual"
