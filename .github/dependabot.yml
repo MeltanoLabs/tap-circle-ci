@@ -1,15 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: pip
-    directory: "/.github/workflows"
-    schedule:
-      interval: monthly
-    commit-message:
-      prefix: "ci: "
-    groups:
-      ci:
-        patterns:
-          - "*"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
@@ -20,13 +10,13 @@ updates:
       actions:
         patterns:
           - "*"
-  - package-ecosystem: pip
+  - package-ecosystem: uv
     versioning-strategy: increase-if-necessary
     directory: "/"
     schedule:
       interval: weekly
     commit-message:
-      prefix: "feat(deps): "
+      prefix: "fix(deps): "
       prefix-development: "chore(deps-dev): "
     groups:
       development-dependencies:
