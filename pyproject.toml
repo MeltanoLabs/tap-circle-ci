@@ -1,71 +1,70 @@
 [build-system]
-build-backend = "poetry_dynamic_versioning.backend"
+build-backend = "hatchling.build"
 requires = [
-  "poetry-core==2.2.1",
-  "poetry-dynamic-versioning==1.9.1",
+  "hatch-vcs",
+  "hatchling>=1,<2",
 ]
 
-[tool.poetry]
+[project]
 name = "meltano-tap-circle-ci"
-version = "0.0.0"
 description = "Singer tap for CircleCI, built with the Meltano SDK for Singer Taps."
-authors = [
-  "Fran Lozano <fjlozanos@gmail.com>",
-]
-maintainers = [
-  "Meltano Team <hello@meltano.com>",
-]
+readme = "README.md"
 keywords = [
+  "CircleCI",
   "ELT",
   "Meltano",
-  "CircleCI",
 ]
 license = "Apache-2.0"
-packages = [
-  { include = "tap_circle_ci" },
+maintainers = [ { name = "Meltano Team", email = "hello@meltano.com" } ]
+authors = [ { name = "Fran Lozano", email = "fjlozanos@gmail.com" } ]
+requires-python = ">=3.10"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
-readme = "README.md"
-homepage = "https://github.com/MeltanoLabs/tap-circle-ci"
-repository = "https://github.com/MeltanoLabs/tap-circle-ci"
-documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
+dynamic = [ "version" ]
+dependencies = [
+  "requests~=2.32.1",
+  "singer-sdk~=0.53.0",
+  "typing-extensions>=4.15; python_full_version<'3.12'",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.10"
-requests = "~=2.32.1"
+urls.Documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
+urls.Homepage = "https://github.com/MeltanoLabs/tap-circle-ci"
+urls.Repository = "https://github.com/MeltanoLabs/tap-circle-ci"
+scripts.tap-circle-ci = "tap_circle_ci.tap:TapCircleCI.cli"
 
-[tool.poetry.dependencies."singer-sdk"]
-version = "~=0.52.0"
+[dependency-groups]
+dev = [
+  { include-group = "test" },
+  { include-group = "typing" },
+]
+test = [
+  "pytest>=9",
+]
+typing = [
+  "mypy>=1.7.1",
+  "ty>=0.0.13",
+  "types-requests~=2.32.4.20250611",
+  { include-group = "test" },
+]
 
-[tool.poetry.group.dev.dependencies]
-mypy = ">=1.7.1"
-pytest = ">=8.0.0"
-types-requests = "~=2.32.4.20250611"
+[tool.hatch.version]
+fallback-version = "0.0.0.dev0"
+source = "vcs"
 
-[tool.poetry.scripts]
-# CLI declaration
-tap-circle-ci = 'tap_circle_ci.tap:TapCircleCI.cli'
+[tool.hatch.build.targets.sdist]
+include = [ "tap_circle_ci" ]
 
-[tool.poetry-dynamic-versioning]
-enable = true
-pattern = """
-(?x)                                                           (?# ignore whitespace)
-    ^v?((?P<epoch>\\d+)!)?(?P<base>\\d+(\\.\\d+)*)             (?# v1.2.3 or v1!2000.1.2)
-    ([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\\d+)?))?   (?# b0)
-    (\\+(?P<tagged_metadata>.+))?$                             (?# +linux)
-"""
-style = "pep440"
-
-[tool.uv]
-python-downloads = "manual"
+[tool.hatch.build.targets.wheel]
+include = [ "tap_circle_ci" ]
 
 [tool.ruff]
-target-version = "py310"
-
 line-length = 88
-src = [
-  "tap_pulumi_cloud",
-  "tests",
-]
 format.preview = true
 lint.select = [
   "ALL",
@@ -95,3 +94,11 @@ lint.isort.known-first-party = [
 lint.pydocstyle.convention = "google"
 # Enable preview style formatting.
 lint.preview = true
+
+[tool.pytest]
+log_level = "INFO"
+minversion = "9"
+
+[tool.mypy]
+warn_unused_ignores = true
+warn_unused_configs = true

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sys
-import typing as t
+from typing import TYPE_CHECKING, Any
 
 from singer_sdk import SchemaDirectory, StreamSchema
 from singer_sdk.authenticators import APIKeyAuthenticator
@@ -16,7 +16,7 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 SCHEMAS_DIR = SchemaDirectory(schemas)
@@ -50,7 +50,7 @@ class CircleCIStream(RESTStream):
         self,
         context: Context | None,
         next_page_token: str | None,
-    ) -> dict[str, t.Any]:
+    ) -> dict[str, Any]:
         """Get URL query parameters.
 
         Returns:

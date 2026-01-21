@@ -2,11 +2,18 @@
 
 from __future__ import annotations
 
+import sys
+
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 from singer_sdk.helpers._classproperty import classproperty  # noqa: PLC2701
 
 from tap_circle_ci import streams
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 
 class TapCircleCI(Tap):
@@ -27,6 +34,7 @@ class TapCircleCI(Tap):
                 "token",
                 th.StringType,
                 required=True,
+                secret=True,
                 description="Personal API Token you have generated that can be used to "
                 "access the CircleCI API",
             ),
@@ -52,12 +60,9 @@ class TapCircleCI(Tap):
             ),
         ).to_dict()
 
+    @override
     def discover_streams(self) -> list[Stream]:
-        """Return a list of discovered streams.
-
-        Returns:
-            A list of stream instances.
-        """
+        """Return a list of discovered streams."""
         return [
             streams.JobsStream(tap=self),
             streams.PipelinesStream(tap=self),

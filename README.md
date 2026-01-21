@@ -16,7 +16,7 @@ WARNING: You must follow the projects in CircleCI to obtain their pipelines.
 You can install this repository directly from the Github repo. For example, by running:
 
 ```bash
-pipx install https://github.com/MeltanoLabs/tap-circle-ci.git
+uv tool install https://github.com/MeltanoLabs/tap-circle-ci.git
 ```
 
 ## Configuration
@@ -61,8 +61,8 @@ tap-circle-ci --config CONFIG --discover > ./catalog.json
 ### Initialize your Development Environment
 
 ```bash
-pipx install poetry
-poetry install
+curl -LsSf https://astral.sh/uv/install.sh | sh  # https://docs.astral.sh/uv/getting-started/installation/
+uv sync
 ```
 
 ### Create and Run Tests
@@ -71,13 +71,13 @@ Create tests within the `tap_circle_ci/tests` subfolder and
   then run:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
-You can also test the `tap-circle-ci` CLI interface directly using `poetry run`:
+You can also test the `tap-circle-ci` CLI interface directly using `uv run`:
 
 ```bash
-poetry run tap-circle-ci --help
+uv run tap-circle-ci --help
 ```
 
 ### Testing with [Meltano](https://www.meltano.com)
@@ -92,7 +92,7 @@ Next, install Meltano (if you haven't already) and any needed plugins:
 
 ```bash
 # Install meltano
-pipx install meltano
+uv tool install meltano
 # Initialize meltano within this directory
 cd tap-circle-ci
 meltano install
@@ -104,7 +104,7 @@ Now you can test and orchestrate using Meltano:
 # Test invocation:
 meltano invoke tap-circle-ci --version
 # OR run a test `elt` pipeline:
-meltano elt tap-circle-ci target-jsonl
+meltano run tap-circle-ci target-jsonl
 ```
 
 ### SDK Dev Guide
