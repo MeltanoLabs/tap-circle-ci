@@ -53,15 +53,15 @@ typing = [
   { include-group = "test" },
 ]
 
-[tool.hatch.version]
-fallback-version = "0.0.0.dev0"
-source = "vcs"
-
 [tool.hatch.build.targets.sdist]
 include = [ "tap_circle_ci" ]
 
 [tool.hatch.build.targets.wheel]
 include = [ "tap_circle_ci" ]
+
+[tool.hatch.version]
+fallback-version = "0.0.0.dev0"
+source = "vcs"
 
 [tool.ruff]
 line-length = 88
