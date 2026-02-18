@@ -1,163 +1,292 @@
 {
-  "type": "object",
-  "additionalProperties": false,
+  "type": [
+    "object",
+    "null"
+  ],
   "properties": {
     "id": {
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid",
+      "description": "The unique ID of the pipeline.",
+      "example": "5034460f-c7c4-4c43-9457-de07e2029e7b"
+    },
+    "errors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The type of error."
+          },
+          "message": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A human-readable error message."
+          }
+        },
+        "required": [
+          "type",
+          "message"
+        ],
+        "description": "An error with a type and message."
+      },
+      "description": "A sequence of errors that have occurred within the pipeline."
     },
     "project_slug": {
       "type": [
-        "null",
-        "string"
-      ]
-    },
-    "number": {
-      "type": [
-        "null",
-        "integer"
-      ]
-    },
-    "state": {
-      "type": [
-        "null",
-        "string"
-      ]
+        "string",
+        "null"
+      ],
+      "description": "The project-slug for the pipeline.",
+      "example": "gh/CircleCI-Public/api-preview-docs"
     },
     "updated_at": {
       "type": [
-        "null",
-        "string"
+        "string",
+        "null"
       ],
-      "format": "date-time"
+      "format": "date-time",
+      "description": "The date and time the pipeline was last updated."
+    },
+    "number": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64",
+      "description": "The number of the pipeline.",
+      "example": 25
+    },
+    "trigger_parameters": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The current state of the pipeline."
     },
     "created_at": {
       "type": [
-        "null",
-        "string"
+        "string",
+        "null"
       ],
-      "format": "date-time"
+      "format": "date-time",
+      "description": "The date and time the pipeline was created."
     },
     "trigger": {
       "type": [
-        "null",
-        "object"
+        "object",
+        "null"
       ],
-      "additionalProperties": false,
       "properties": {
-        "received_at": {
-          "type": [
-            "null",
-            "string"
-          ],
-          "format": "date-time"
-        },
         "type": {
           "type": [
-            "null",
-            "string"
-          ]
+            "string",
+            "null"
+          ],
+          "description": "The type of trigger."
+        },
+        "received_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "The date and time the trigger was received."
         },
         "actor": {
           "type": [
-            "null",
-            "object"
+            "object",
+            "null"
           ],
-          "additionalProperties": false,
           "properties": {
             "login": {
               "type": [
-                "null",
-                "string"
-              ]
+                "string",
+                "null"
+              ],
+              "description": "The login information for the user on the VCS.",
+              "title": "Login"
             },
             "avatar_url": {
               "type": [
-                "null",
-                "string"
-              ]
+                "string",
+                "null"
+              ],
+              "x-nullable": true,
+              "description": "URL to the user's avatar on the VCS"
             }
-          }
+          },
+          "required": [
+            "login",
+            "avatar_url"
+          ],
+          "description": "The user who triggered the Pipeline."
         }
-      }
+      },
+      "required": [
+        "type",
+        "received_at",
+        "actor"
+      ],
+      "description": "A summary of the trigger."
     },
     "vcs": {
       "type": [
-        "null",
-        "object"
+        "object",
+        "null"
       ],
-      "additionalProperties": false,
       "properties": {
-        "origin_repository_url": {
+        "provider_name": {
           "type": [
-            "null",
-            "string"
-          ]
+            "string",
+            "null"
+          ],
+          "description": "Name of the VCS provider (e.g. GitHub, Bitbucket).",
+          "example": "GitHub"
         },
         "target_repository_url": {
           "type": [
-            "null",
-            "string"
-          ]
-        },
-        "review_id": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "review_url": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "revision": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "provider_name": {
-          "type": [
-            "null",
-            "string"
-          ]
-        },
-        "commit": {
-          "type": [
-            "null",
-            "object"
+            "string",
+            "null"
           ],
-          "additionalProperties": false,
-          "properties": {
-            "body": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "subject": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          }
+          "description": "URL for the repository the trigger targets (i.e. the repository where the PR will be merged). For fork-PR pipelines, this is the URL to the parent repo. For other pipelines, the `origin_` and `target_repository_url`s will be the same.",
+          "example": "https://github.com/CircleCI-Public/api-preview-docs"
         },
         "branch": {
           "type": [
-            "null",
-            "string"
-          ]
+            "string",
+            "null"
+          ],
+          "description": "The branch where the pipeline ran. The HEAD commit on this branch was used for the pipeline. Note that `branch` and `tag` are mutually exclusive. To trigger a pipeline for a PR by number use `pull/<number>/head` for the PR ref or `pull/<number>/merge` for the merge ref (GitHub only).",
+          "example": "feature/design-new-api"
+        },
+        "review_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The code review id.",
+          "example": "123"
+        },
+        "review_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The code review URL.",
+          "example": "https://github.com/CircleCI-Public/api-preview-docs/pull/123"
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-nullable": true,
+          "description": "The code revision the pipeline ran.",
+          "example": "f454a02b5d10fcccfd7d9dd7608a76d6493a98b4"
         },
         "tag": {
           "type": [
-            "null",
-            "string"
-          ]
+            "string",
+            "null"
+          ],
+          "description": "The tag used by the pipeline. The commit that this tag points to was used for the pipeline. Note that `branch` and `tag` are mutually exclusive.",
+          "example": "v3.1.4159"
+        },
+        "commit": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "subject": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-nullable": true,
+              "description": "The subject of the commit message."
+            },
+            "body": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-nullable": true,
+              "description": "The body of the commit message."
+            }
+          },
+          "required": [
+            "subject",
+            "body"
+          ],
+          "description": "The latest commit in the pipeline."
+        },
+        "origin_repository_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "URL for the repository where the trigger originated. For fork-PR pipelines, this is the URL to the fork. For other pipelines the `origin_` and `target_repository_url`s will be the same.",
+          "example": "https://github.com/CircleCI-Public/api-preview-docs"
         }
-      }
+      },
+      "required": [
+        "provider_name",
+        "origin_repository_url",
+        "target_repository_url",
+        "revision"
+      ],
+      "description": "VCS information for the pipeline."
     }
   },
-  "required": ["id"]
+  "required": [
+    "id",
+    "number",
+    "project_slug",
+    "created_at",
+    "errors",
+    "state",
+    "trigger"
+  ],
+  "description": "A pipeline response.",
+  "title": "Pipeline"
 }

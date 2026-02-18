@@ -32,7 +32,6 @@ dependencies = [
   "singer-sdk~=0.53.0",
   "typing-extensions>=4.15; python_full_version<'3.12'",
 ]
-
 urls.Documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
 urls.Homepage = "https://github.com/MeltanoLabs/tap-circle-ci"
 urls.Repository = "https://github.com/MeltanoLabs/tap-circle-ci"
@@ -40,6 +39,7 @@ scripts.tap-circle-ci = "tap_circle_ci.tap:TapCircleCI.cli"
 
 [dependency-groups]
 dev = [
+  "urllib3>=2.6.3",
   { include-group = "test" },
   { include-group = "typing" },
 ]
@@ -53,18 +53,14 @@ typing = [
   { include-group = "test" },
 ]
 
-[tool.hatch.build.targets.sdist]
-include = [ "tap_circle_ci" ]
-
-[tool.hatch.build.targets.wheel]
-include = [ "tap_circle_ci" ]
-
-[tool.hatch.version]
-fallback-version = "0.0.0.dev0"
-source = "vcs"
+[tool.hatch]
+build.targets.sdist.include = [ "tap_circle_ci" ]
+build.targets.wheel.include = [ "tap_circle_ci" ]
+version.fallback-version = "0.0.0.dev0"
+version.source = "vcs"
 
 [tool.ruff]
-line-length = 88
+line-length = 100
 format.preview = true
 lint.select = [
   "ALL",
