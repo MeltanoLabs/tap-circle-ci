@@ -86,3 +86,26 @@ class JobsStream(CircleCIStream):
         if row and context:
             row["_workflow_id"] = context["workflow_id"]
         return row
+
+
+class ContextsStream(CircleCIStream):
+    """Define contexts stream."""
+
+    name = "contexts"
+    path = "/context"
+    primary_keys = ("id",)
+
+    @override
+    def get_url_params(
+        self,
+        context: Context | None,
+        next_page_token: str | None,
+    ) -> dict[str, Any]:
+        """Get URL query parameters.
+
+        Returns:
+            A dictionary with the URL parameters.
+        """
+        params = super().get_url_params(context, next_page_token)
+        params["owner-slug"] = self.config.get("org_slug")
+        return params

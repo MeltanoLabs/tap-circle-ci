@@ -1,54 +1,137 @@
 {
   "type": [
-    "null",
-    "object"
+    "object",
+    "null"
   ],
-  "additionalProperties": false,
   "properties": {
-    "stopped_at": {
+    "pipeline_id": {
       "type": [
-        "null",
-        "string"
+        "string",
+        "null"
       ],
-      "format": "date-time"
+      "format": "uuid",
+      "description": "The ID of the pipeline this workflow belongs to.",
+      "example": "5034460f-c7c4-4c43-9457-de07e2029e7b"
+    },
+    "canceled_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid",
+      "description": "The unique ID of the workflow."
+    },
+    "auto_rerun_number": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64",
+      "minimum": 1,
+      "description": "Present if this workflow was auto-rerun from a previous workflow. The Nth auto-rerun workflow will have auto_rerun_number N",
+      "example": 1
     },
     "name": {
       "type": [
-        "null",
-        "string"
-      ]
+        "string",
+        "null"
+      ],
+      "description": "The name of the workflow.",
+      "example": "build-and-test"
     },
     "project_slug": {
       "type": [
-        "null",
-        "string"
-      ]
+        "string",
+        "null"
+      ],
+      "description": "The project-slug for the pipeline this workflow belongs to.",
+      "example": "gh/CircleCI-Public/api-preview-docs"
     },
-    "pipeline_number": {
+    "errored_by": {
       "type": [
-        "null",
-        "integer"
-      ]
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "tag": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-nullable": true,
+      "description": "Tag used for the workflow",
+      "example": "setup"
     },
     "status": {
       "type": [
-        "null",
-        "string"
-      ]
+        "string",
+        "null"
+      ],
+      "description": "The current status of the workflow."
     },
-    "id": {
-      "type": "string"
+    "started_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "max_auto_reruns": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64",
+      "minimum": 1,
+      "description": "The maximum number of auto reruns specified for the workflow.",
+      "example": 5
+    },
+    "pipeline_number": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64",
+      "description": "The number of the pipeline this workflow belongs to.",
+      "example": 25
     },
     "created_at": {
       "type": [
-        "null",
-        "string"
+        "string",
+        "null"
       ],
-      "format": "date-time"
+      "format": "date-time",
+      "description": "The date and time the workflow was created."
     },
-    "pipeline_id": {
-      "type": "string"
+    "stopped_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "x-nullable": true,
+      "description": "The date and time the workflow stopped."
     }
   },
-  "required": ["pipeline_id", "id"]
+  "required": [
+    "id",
+    "name",
+    "status",
+    "created_at",
+    "stopped_at",
+    "pipeline_id",
+    "pipeline_number",
+    "project_slug",
+    "started_by"
+  ],
+  "description": "A workflow",
+  "title": "Workflow"
 }

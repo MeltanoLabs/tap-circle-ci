@@ -1,0 +1,39 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid",
+      "description": "The unique ID of the context."
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The user defined name of the context."
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The date and time the context was created.",
+      "example": "2015-09-21T17:29:21.042Z"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "created_at"
+  ],
+  "title": "Context"
+}

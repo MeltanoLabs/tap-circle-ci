@@ -67,4 +67,5 @@ class TapCircleCI(Tap):
             streams.JobsStream(tap=self),
             streams.PipelinesStream(tap=self),
             streams.WorkflowsStream(tap=self),
+            streams.ContextsStream(tap=self),
         ]
