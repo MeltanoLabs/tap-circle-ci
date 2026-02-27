@@ -14,7 +14,7 @@ updates:
     versioning-strategy: increase-if-necessary
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: "fix(deps): "
       prefix-development: "chore(deps-dev): "
