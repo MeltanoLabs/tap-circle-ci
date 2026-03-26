@@ -440,7 +440,7 @@ typing = [
 
 [package.metadata]
 requires-dist = [
-    { name = "requests", specifier = ">=2.32.1,<2.34.0" },
+    { name = "requests", specifier = "~=2.33.0" },
     { name = "singer-sdk", specifier = "~=0.53.0" },
     { name = "typing-extensions", marker = "python_full_version < '3.12'", specifier = ">=4.15" },
 ]
