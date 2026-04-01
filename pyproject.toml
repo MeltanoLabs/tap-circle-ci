@@ -49,7 +49,7 @@ test = [
 typing = [
   "mypy>=1.7.1",
   "ty>=0.0.13",
-  "types-requests~=2.32.4.20250611",
+  "types-requests>=2.32.4.20250611,<2.33.1.0",
   { include-group = "test" },
 ]
 
