@@ -91,10 +91,10 @@ lint.pydocstyle.convention = "google"
 # Enable preview style formatting.
 lint.preview = true
 
-[tool.pytest]
-log_level = "INFO"
-minversion = "9"
-
 [tool.mypy]
 warn_unused_ignores = true
 warn_unused_configs = true
+
+[tool.pytest]
+log_level = "INFO"
+minversion = "9"
