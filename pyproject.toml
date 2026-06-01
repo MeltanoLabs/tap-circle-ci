@@ -53,10 +53,10 @@ typing = [
 ]
 
 [tool.hatch]
-build.targets.sdist.include = [ "tap_circle_ci" ]
-build.targets.wheel.include = [ "tap_circle_ci" ]
-version.fallback-version = "0.0.0.dev0"
 version.source = "vcs"
+version.fallback-version = "0.0.0.dev0"
+build.targets.wheel.include = [ "tap_circle_ci" ]
+build.targets.sdist.include = [ "tap_circle_ci" ]
 
 [tool.ruff]
 line-length = 100
