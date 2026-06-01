@@ -28,7 +28,7 @@ classifiers = [
 ]
 dynamic = [ "version" ]
 dependencies = [
-  "requests~=2.33.0",
+  "requests~=2.34.2",
   "singer-sdk~=0.53.0",
   "typing-extensions>=4.15; python_full_version<'3.12'",
 ]
@@ -49,7 +49,6 @@ test = [
 typing = [
   "mypy>=1.7.1",
   "ty>=0.0.13",
-  "types-requests>=2.32.4.20250611,<2.33.1",
   { include-group = "test" },
 ]
 
