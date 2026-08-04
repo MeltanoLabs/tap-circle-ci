@@ -110,6 +110,40 @@
       "format": "date-time",
       "description": "The date and time the pipeline was created."
     },
+    "warnings": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The type of warning."
+          },
+          "message": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A human-readable warning message."
+          }
+        },
+        "required": [
+          "type",
+          "message"
+        ],
+        "description": "A warning with a type and message."
+      },
+      "description": "A sequence of warnings that have occurred within the pipeline."
+    },
     "trigger": {
       "type": [
         "object",
@@ -284,6 +318,7 @@
     "project_slug",
     "created_at",
     "errors",
+    "warnings",
     "state",
     "trigger"
   ],

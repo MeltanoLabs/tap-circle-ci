@@ -96,8 +96,10 @@
         "items": {
           "enum": [
             "success",
+            "not_run",
             "failed",
-            "canceled"
+            "canceled",
+            "unauthorized"
           ],
           "type": "string"
         },
