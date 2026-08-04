@@ -12,18 +12,26 @@ env:
   FORCE_COLOR: 1
 
 jobs:
-  test:
+  build-package:
+    name: Build & verify package
     runs-on: ubuntu-latest
-    env:
-      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
+    outputs:
+      supported-python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: hynek/build-and-inspect-python-package@d44ca7d91762de7a7d5436ddae667c6da6d1c3df # v2.18.0
+        id: baipp
+
+  test:
+    name: Test
+    needs: [build-package]
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version:
-        - "3.14"
-        - "3.13"
-        - "3.12"
-        - "3.11"
-        - "3.10"
+        python-version: ${{ fromJson(needs.build-package.outputs.supported-python-versions) }}
       max-parallel: 2
 
     steps:

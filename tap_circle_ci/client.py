@@ -26,7 +26,7 @@ class CircleCIStream(RESTStream):
     """CircleCI stream class."""
 
     records_jsonpath = "$.items[*]"
-    next_page_token_jsonpath = "$.next_page_token"  # noqa: S105
+    next_page_token_jsonpath = "$.next_page_token"  # ruff: ignore[hardcoded-password-string]
     schema = StreamSchema(SCHEMAS_DIR)
 
     @override
