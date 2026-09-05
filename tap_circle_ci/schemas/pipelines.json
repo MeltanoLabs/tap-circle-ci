@@ -134,6 +134,20 @@
               "null"
             ],
             "description": "A human-readable warning message."
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A short description of the warning type."
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A URL with more information about the warning."
           }
         },
         "required": [
