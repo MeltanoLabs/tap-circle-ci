@@ -152,7 +152,8 @@
         },
         "required": [
           "type",
-          "message"
+          "message",
+          "description"
         ],
         "description": "A warning with a type and message."
       },
