@@ -31,18 +31,18 @@ dependencies = [
   "singer-sdk~=0.54.4",
   "typing-extensions>=4.15; python_full_version<'3.12'",
 ]
-[[project.authors]]
-name = "Fran Lozano"
-email = "fjlozanos@gmail.com"
 [[project.maintainers]]
 name = "Meltano Team"
 email = "hello@meltano.com"
-[project.scripts]
-tap-circle-ci = "tap_circle_ci.tap:TapCircleCI.cli"
+[[project.authors]]
+name = "Fran Lozano"
+email = "fjlozanos@gmail.com"
 [project.urls]
 Documentation = "https://github.com/MeltanoLabs/tap-circle-ci/blob/main/README.md"
 Homepage = "https://github.com/MeltanoLabs/tap-circle-ci"
 Repository = "https://github.com/MeltanoLabs/tap-circle-ci"
+[project.scripts]
+tap-circle-ci = "tap_circle_ci.tap:TapCircleCI.cli"
 
 [dependency-groups]
 dev = [
@@ -59,12 +59,12 @@ typing = [
   { include-group = "test" },
 ]
 
-[tool.hatch.build.targets]
-wheel.include = [ "tap_circle_ci" ]
-sdist.include = [ "tap_circle_ci" ]
 [tool.hatch.version]
 source = "vcs"
 fallback-version = "0.0.0.dev0"
+[tool.hatch.build.targets]
+wheel.include = [ "tap_circle_ci" ]
+sdist.include = [ "tap_circle_ci" ]
 
 [tool.ruff]
 line-length = 100
@@ -100,7 +100,6 @@ pydocstyle.convention = "google"
 preview = true
 
 [tool.pyproject-fmt]
-max_supported_python = "3.15"
 table_format = "long"
 
 [tool.mypy]
